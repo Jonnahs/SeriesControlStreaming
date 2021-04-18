@@ -8,9 +8,11 @@ use App\Models\Serie;
 
 class SeriesController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
         $series = Serie::query()->orderBy('nome')->get();
-        return view('series.index', compact('series'));
+        $mensagem = $request->session()->get('mensagem');
+
+        return view('series.index', compact('series','mensagem'));
     }
     public function create() {
         return view('series.create');
@@ -18,6 +20,10 @@ class SeriesController extends Controller
     public function store(Request $request)
     {
         $serie = Serie::create($request->all());
+        $request->session()->flash(
+            'mensagem',
+            "Série com id {$serie->id} criada com sucesso {$serie->nome}"
+        );
         return redirect('/series');
         echo "Série com id {$serie->id} criada: {$serie->nome}";
 
