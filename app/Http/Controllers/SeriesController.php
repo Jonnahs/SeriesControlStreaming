@@ -9,7 +9,7 @@ use App\Models\Serie;
 class SeriesController extends Controller
 {
     public function index() {
-        $series = Serie::all();
+        $series = Serie::query()->orderBy('nome')->get();
         return view('series.index', compact('series'));
     }
     public function create() {
@@ -18,9 +18,9 @@ class SeriesController extends Controller
     public function store(Request $request)
     {
         $serie = Serie::create($request->all());
-
+        return redirect('/series');
         echo "Série com id {$serie->id} criada: {$serie->nome}";
-        
+
 
     }
 }
