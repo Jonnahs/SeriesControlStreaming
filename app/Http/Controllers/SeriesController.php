@@ -15,9 +15,11 @@ class SeriesController extends Controller
 
         return view('series.index', compact('series','mensagem'));
     }
+    
     public function create() {
         return view('series.create');
     }
+
     public function store(SeriesRequest $request)
     {
         $serie = Serie::create($request->all());
@@ -28,6 +30,7 @@ class SeriesController extends Controller
         return redirect()->route('listar_series');
         echo "Série com id {$serie->id} criada: {$serie->nome}";
     }
+
     public function destroy(Request $request)
     {
         Serie::destroy($request->id);

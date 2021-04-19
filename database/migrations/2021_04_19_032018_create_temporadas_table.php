@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CriarTabelaSeries extends Migration
+class CreateTemporadasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CriarTabelaSeries extends Migration
      */
     public function up()
     {
-        Schema::create('series', function (Blueprint $table) {
+        Schema::create('temporadas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nome');
+            $table->integer('numero');
+            $table->integer('serie_id')->unsigned();
+            $table->foreign('serie_id')->references('id')->on('series');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CriarTabelaSeries extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('temporadas');
     }
 }
