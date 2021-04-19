@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SeriesRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use App\Models\Serie;
@@ -17,7 +18,7 @@ class SeriesController extends Controller
     public function create() {
         return view('series.create');
     }
-    public function store(Request $request)
+    public function store(SeriesRequest $request)
     {
         $serie = Serie::create($request->all());
         $request->session()->flash(
