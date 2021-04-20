@@ -25,7 +25,7 @@
                     <form method="post" action="/series/{{ $serie->id }}"
                         onsubmit="return confirm('Tem certeza que deseja deletar a série {{ addslashes($serie->nome) }}?')">
                         @csrf
-                        {{-- @method('DELETE') --}}
+                        @method('DELETE')
                         <button class="btn btn-danger btn-sm">
                             <i class="far fa-trash-alt"></i>
                         </button>

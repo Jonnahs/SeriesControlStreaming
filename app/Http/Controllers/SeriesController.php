@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\CriadorDeSerie;
+use App\Services\{CriadorDeSerie,RemovedorDeSerie};
 use App\Http\Requests\SeriesRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -38,19 +38,11 @@ class SeriesController extends Controller
         echo "Série com id {$serie->id} criada: {$serie->nome}";
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, RemovedorDeSerie $removedorDeSerie)
     {
         //Serie::destroy($request->id);
 
-        $serie = Serie::find($request->id);
-        $nomeSerie = $serie->nome;
-        $serie->temporadas->each(function (Temporada $temporada){
-            $temporada->episodios->each(function (Episodio $episodio){
-                $episodio->delete();
-            });
-            $temporada->delete();
-        });
-        $serie->delete();
+        $nomeSerie = $removedorDeSerie->removerSerie($request->id);
         $request->session()->flash(
             'mensagem',
             "Série $nomeSerie removida com sucesso!"
