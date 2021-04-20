@@ -17,6 +17,11 @@ Séries
     @foreach ($series as $serie)
         <li class="list-group-item d-flex justify-content-between align-items-center">
             {{ $serie->nome }}
+
+            <span class="d-flex">
+            <a href="#" class="btn btn-info btn-sm">
+                <i class="fas fa-external-link-alt"></i>
+            </a>
         <form method="post" action="/series/{{ $serie->id }}"
             onsubmit="return confirm('Tem certeza que deseja deletar a série {{ addslashes($serie->nome) }}?')">
             @csrf
@@ -25,6 +30,7 @@ Séries
                 <i class="far fa-trash-alt"></i>
             </button>
         </form>
+            </span>
         </li>
     @endforeach
 </ul>
