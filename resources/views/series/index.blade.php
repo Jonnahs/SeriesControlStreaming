@@ -19,7 +19,7 @@
                 {{ $serie->nome }}
 
                 <span class="d-flex">
-                    <a href="/series/{{ $serie->id }}/temporadas" class="btn btn-info btn-sm mr-1">
+                    <a href="/series/{{ $serie->id }}/temporadas" class="btn btn-info btn-sm mr-2">
                         <i class="fas fa-external-link-alt"></i>
                     </a>
                     <form method="post" action="/series/{{ $serie->id }}"
