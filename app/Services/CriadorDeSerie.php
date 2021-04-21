@@ -12,8 +12,7 @@ class CriadorDeSerie
         int $epPorTemporada
         ): Serie
     {
-        $serie = '';
-        DB::transaction(function () use ($qtdTemporadas,$epPorTemporada, $nomeSerie, &$serie){
+        DB::beginTransaction();
             $serie = Serie::create(['nome' => $nomeSerie]);
         // $qtdTemporadas = $request->qtd_temporadas;
         for ($i = 1; $i <= $qtdTemporadas; $i++){
@@ -23,8 +22,8 @@ class CriadorDeSerie
                 $temporada->episodios()->create(['numero' => $j]);
             }
         }
-        
-        });
+        DB::commit();
+
         return $serie;
         
     }

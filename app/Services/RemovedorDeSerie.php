@@ -9,8 +9,9 @@ class RemovedorDeSerie
 {
     public function removerSerie(int $serieId): string
     {
-        $nomeSerie = '';
-        DB::transaction(function () use ($serieId, &$nomeSerie){
+        
+        // DB::transaction(function () use ($serieId, &$nomeSerie){
+            DB::beginTransaction();
             $serie = Serie::find($serieId);
         $nomeSerie = $serie->nome;
         $serie->temporadas->each(function (Temporada $temporada){
@@ -20,7 +21,7 @@ class RemovedorDeSerie
             $temporada->delete();
         });
         $serie->delete();
-        });
+        DB::commit();
         
 
         return $nomeSerie;
