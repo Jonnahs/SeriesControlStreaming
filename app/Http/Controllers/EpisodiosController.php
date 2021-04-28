@@ -9,7 +9,7 @@ class EpisodiosController extends Controller
 {
     public function index(Temporada $temporada)
     {
-        $temporada = $temporada->episodios;
+        $episodios = $temporada->episodios;
 
         return view('episodios.index', compact('episodios'));
     }
