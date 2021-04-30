@@ -28,3 +28,4 @@ Route::post('/series/{id}/editaNome', [SeriesController::class, 'edit']);
 
 Route::get('/series/{serieId}/temporadas',[TemporadasController::class, 'index']);
 Route::get('/temporadas/{temporada}/episodios',[EpisodiosController::class, 'index'])->name('listar_episodios');
+Route::post('/temporadas/{temporada}/episodios/assistir',[EpisodiosController::class, 'assistir']);
